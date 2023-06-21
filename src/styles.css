@@ -7,9 +7,9 @@
 :root {
     --color-green: #1DB954;
     --color-grey-soft: #323232;
-    --color-grey-hard: #181818;
     --color-black: #000000;
     --color-white: #FFFFFF;
+    --color-grey-hard: #181818;
     --font-size: 1rem;
     --font-size-md: 1.2rem;
     --font-size-lg: 1.8rem;
