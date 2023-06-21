@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './media-player.component.html',
   styleUrls: ['./media-player.component.css']
 })
-export class MediaPlayerComponent {
+export class MediaPlayerComponent implements OnInit {
+
+  ngOnInit(): void {
+  }
 
 }
