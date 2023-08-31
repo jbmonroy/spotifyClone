@@ -1,7 +1,7 @@
 .card-player {
-    background-color: var(--color-gray-soft);
+    background-color: var(--color-grey-soft);
     height: 5rem;
-    border-radius: var(--border-radius-soft);
+    border-radius: var(--border-radious-soft);
     display: flex;
     cursor: pointer;
     transition: all ease var(--animation-time);
@@ -16,8 +16,8 @@
     width: 5rem;
     height: 100%;
     object-fit: cover;
-    border-top-left-radius: var(--border-radius-soft);
-    border-bottom-left-radius: var(--border-radius-soft);
+    border-top-left-radius: var(--border-radious-soft);
+    border-bottom-left-radius: var(--border-radious-soft);
 }
 
 .card-player .content-player {
