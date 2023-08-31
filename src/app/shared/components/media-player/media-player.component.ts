@@ -12,7 +12,7 @@ import { TrackModel } from '@core/models/tracks.model';
   styleUrls: ['./media-player.component.css']
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  private subList$: Array<Subscription> = [];
+  private subList$: Subscription[] = [];
   
   private _multimediaService = inject(MultimediaService); 
 

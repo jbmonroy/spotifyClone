@@ -1,12 +1,6 @@
 <div class="tracks-page">
-    <app-generic-section
-        [title]="'!La mejor música del mundo!'"
-        [mode]="'small'"
-        [dataTracks]="dataTracks"
-    ></app-generic-section>
-    <app-generic-section
-        [title]="'Lo mejor de Electrónica'"
-        [mode]="'big'"
-        [dataTracks]="dataTracks"
-    ></app-generic-section>
+    <app-generic-section [title]="'!La mejor música del mundo!'" [mode]="'small'" [dataTracks]="trendingTracks
+        "></app-generic-section>
+    <app-generic-section [title]="'Lo mejor de Electrónica'" [mode]="'big'"
+        [dataTracks]="randomTracks"></app-generic-section>
 </div>

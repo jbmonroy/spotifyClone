@@ -7,7 +7,7 @@
     </ul>
     <ul class="play-list-rows" *ngFor="let track of tracks | orderList:sort.property: sort.order">
         <li class="track-name">
-            <ng-container *ngTemplateOutlet="coverSection;context:{track:track}"></ng-container>
+            <ng-container *ngTemplateOutlet="coverSection;context:{track}"></ng-container>
         </li>
         <li class="track-name-opacity">
             {{track.album}}
@@ -26,7 +26,7 @@
 <ng-template #coverSection let-track="track">
 
     <div class="cover-section">
-        <img appImgBroken class="cover-track" [src]="track.cover" [alt]="track.name">
+        <img appImgBroken class="cover-track" [src]="track.cover" [alt]="track.name" appImgBroken>
         <div class="cover-info">
             <div class="name-track">{{track.name}}</div>
             <div class="name-track-details">{{track.artist.name}}</div>

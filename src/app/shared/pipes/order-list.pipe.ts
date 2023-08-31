@@ -7,7 +7,7 @@ import { TrackModel } from '@core/models/tracks.model';
 })
 export class OrderListPipe implements PipeTransform {
 
-  transform(value: Array<any>, args: string | null = null, sort: string = 'asc'): Array<TrackModel> {
+  transform(value: any[], args: string | null = null, sort: string = 'asc'): TrackModel[] {
     try {
       if (args === null) {
         return value;

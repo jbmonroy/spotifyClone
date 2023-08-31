@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
     this.setCustomOptions();
   }
 
-  setCustomOptions(opts: Array<{name:string, router:Array<string>}> = [
+  setCustomOptions(opts:{name:string, router:string[]}[] = [
     {
       name: 'Mi Lista #1',
       router: ['/']
@@ -69,7 +69,7 @@ export class SidebarComponent implements OnInit {
     this.customOptions.set(opts);
   }
 
-  setMainMenu(key: 'accessLink'|'defaultOptions', value: Array<any>):void{
+  setMainMenu(key: 'accessLink'|'defaultOptions', value: any[]):void{
     this.mainMenu.mutate(val=>{
       val[key] = value;
     });

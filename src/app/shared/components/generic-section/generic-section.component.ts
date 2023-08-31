@@ -13,7 +13,7 @@ import { TrackModel } from '@core/models/tracks.model';
 export class GenericSectionComponent {
   @Input()title: string = '';
   @Input()mode: 'small' | 'big' = 'small';
-  @Input()dataTracks: Array<TrackModel> = [];
+  @Input()dataTracks: TrackModel[] = [];
 
 
 }
