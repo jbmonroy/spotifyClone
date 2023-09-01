@@ -1,34 +1,36 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
-import { Observable, of } from 'rxjs';
-import * as dataRaw from '../../../data/tracks.data.json';
+import { Observable, map, mergeMap, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TracksService {
-  dataTracksTrending$: Observable<TrackModel[]> = of([]);
-  dataTracksRandom$: Observable<TrackModel[]> = of([]);
+  private httpClient = inject(HttpClient);
+  private readonly API = environment.NODE_API;
 
-  constructor() { 
-    const { data }:any = (dataRaw as any).default;
-    
-    this.dataTracksTrending$ = of(data);
-    this.dataTracksRandom$ = new Observable((observer)=>{
-      const track: TrackModel[] = [{
-        _id:'9',
-        name: 'Leve',
-        album:'Cartel de Santa',
-        url:'https://',
-        cover:'https://jenesaispop.com/wp-content/uploads/2009/09/guetta_onelove.jpg',
-        artist:{
-          name:'Cartel de Santa',
-          nationality:'MX',
-          nickname: 'Cartel de Santa'
-        },
-        duration:null
-      }]
-      setTimeout(()=>observer.next(track), 3500);
-    });
+  constructor() { }
+
+  dataTracksTrending$(): Observable<any> {
+    return this.httpClient.get(`${this.API}/tracks`).pipe(
+      map((dataRaw:any)=>dataRaw.data)
+    )
   }
+  
+  dataTracksRandom$(): Observable<any> {
+    return this.httpClient.get(`${this.API}/tracks`).pipe(
+      mergeMap(({data}:any)=>this.skipById(data, '1'))
+    );
+  }
+
+  skipById(listTracks:TrackModel[],  id:string):Promise<TrackModel[]> {
+    return new Promise((resolve,reject)=>{
+      const listTmp = listTracks.filter(a=>a._id != id)
+      resolve(listTmp);
+
+    })
+  }
+
 }

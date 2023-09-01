@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
-import * as dataMock from '../../../../data/tracks.data.json';
 import { TracksService } from '@modules/tracks/services/tracks.service';
 import { Subscription } from 'rxjs';
 
@@ -17,10 +16,9 @@ export class TracksPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.subsList$.push(
-      this._tracksService.dataTracksTrending$.subscribe( {
+      this._tracksService.dataTracksTrending$().subscribe( {
         next: (tracks:TrackModel[])=>{
           this.trendingTracks =  tracks;
-          this.randomTracks = tracks;
           console.log(typeof this.randomTracks);
           
         }
@@ -28,7 +26,7 @@ export class TracksPageComponent implements OnInit{
     );
 
     this.subsList$.push(
-      this._tracksService.dataTracksRandom$.subscribe(
+      this._tracksService.dataTracksRandom$().subscribe(
         (tracks:TrackModel[])=>{
           this.randomTracks = [...this.randomTracks, ...tracks];
           console.log('Random in->', tracks);
