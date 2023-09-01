@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: ()=>import('@modules/history/history.module').then( mod => mod.HistoryModule)
+  },
+  {
+    path:'**',
+    redirectTo:'/tracks'
   }
 ];
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import * as dataMock from '../../../data/tracks.data.json';
 import { TrackModel } from '@core/models/tracks.model';
 import { OrderListPipe } from '@shared/pipes/order-list.pipe';
 import { ImgBrokenDirective } from '@shared/directives/img-broken.directive';
@@ -23,7 +22,7 @@ export class PlaylistBodyComponent implements OnInit {
   }
 
   getTracks(): void {
-    this._tracksService.dataTracksTrending$.subscribe({
+    this._tracksService.dataTracksTrending$().subscribe({
       next: (tracks:TrackModel[])=>{
         this.tracks = tracks;
       }

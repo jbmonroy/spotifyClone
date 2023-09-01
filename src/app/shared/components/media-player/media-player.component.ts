@@ -21,7 +21,6 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       this._multimediaService.callback.subscribe(
         (track:TrackModel)=>{
           console.log('Recibiendo track',track);
-          
         }
       )
     );
