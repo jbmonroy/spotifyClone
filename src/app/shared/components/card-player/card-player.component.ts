@@ -18,7 +18,6 @@ export class CardPlayerComponent {
 
   sendPlay(track: TrackModel): void {
     this._multimediaService.callback.emit(track);
-    console.log('Enviando track ', track);
     
   }
 }

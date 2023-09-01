@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
-import { Observable, map, mergeMap, of } from 'rxjs';
+import { Observable, catchError, map, mergeMap, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,13 +15,21 @@ export class TracksService {
 
   dataTracksTrending$(): Observable<any> {
     return this.httpClient.get(`${this.API}/tracks`).pipe(
-      map((dataRaw:any)=>dataRaw.data)
+      map((dataRaw:any)=>dataRaw.data),
+      catchError(err=>{
+        console.error('ERROR:',err)
+        return of([]);
+      })
     )
   }
   
   dataTracksRandom$(): Observable<any> {
     return this.httpClient.get(`${this.API}/tracks`).pipe(
-      mergeMap(({data}:any)=>this.skipById(data, '1'))
+      mergeMap(({data}:any)=>this.skipById(data, '1')),
+      catchError(err=>{
+        console.error('ERROR:', err);
+        return of([]);
+      })
     );
   }
 
