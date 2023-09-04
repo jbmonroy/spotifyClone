@@ -4,13 +4,17 @@ import { HomePageComponent } from '@modules/home/pages/home-page/home-page.compo
 
 const routes: Routes = [
   {
+    path: 'auth',
+    loadChildren: ()=>import('./modules/auth/auth.module').then( mod => mod.AuthModule)
+  }
+  ,{
     path: '',
     loadChildren: ()=>import('./modules/home/home.module').then( mod => mod.HomeModule),
     component: HomePageComponent
   },
   {
-    path: 'auth',
-    loadChildren: ()=>import('./modules/auth/auth.module').then( mod => mod.AuthModule)
+    path:'**',
+    redirectTo:'/tracks'
   }
 ];
 

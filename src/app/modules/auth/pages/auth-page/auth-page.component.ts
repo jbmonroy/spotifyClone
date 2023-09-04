@@ -8,6 +8,7 @@ import { AuthService } from '@modules/auth/services/auth.service';
   styleUrls: ['./auth-page.component.css']
 })
 export class AuthPageComponent {
+  errorSession:boolean = false;
 
   loginForm = new FormGroup({
     email: new FormControl('', [
@@ -23,7 +24,16 @@ export class AuthPageComponent {
   private _authService = inject(AuthService);
 
   sendCredential(): void {
+    this.errorSession = false;
     const { email, password } = this.loginForm.value as {email:string,password:string};
-    this._authService.sendCredentials(email, password);
+    this._authService.sendCredentials(email, password).subscribe({
+      next: logInfo =>{
+        console.log(logInfo);
+      },
+      error: error=>{
+        console.log('ERROR DE AUTENTICACIÓN:',error);
+        this.errorSession = true;
+      }
+    });
   }
 }
