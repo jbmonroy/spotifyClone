@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@modules/auth/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-auth-page',
@@ -22,16 +24,16 @@ export class AuthPageComponent {
     ])
   });
   private _authService = inject(AuthService);
+  private router = inject(Router);
 
   sendCredential(): void {
-    this.errorSession = false;
     const { email, password } = this.loginForm.value as {email:string,password:string};
     this._authService.sendCredentials(email, password).subscribe({
       next: logInfo =>{
-        console.log(logInfo);
+        this.router.navigate(['/','tracks']);
+        this.errorSession = false;
       },
-      error: error=>{
-        console.log('ERROR DE AUTENTICACIÓN:',error);
+      error: err=>{
         this.errorSession = true;
       }
     });
