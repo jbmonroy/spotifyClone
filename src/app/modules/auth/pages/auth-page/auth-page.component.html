@@ -10,18 +10,18 @@
         <form class="login-auth-form" (ngSubmit)="sendCredential()" [formGroup]="loginForm">
             <div class="form-group">
                 <label for="email">Dirección de correo o nombre de usuario</label>
-                <input formControlName="email" type="text" placeholder="Dirección de correo o nombre de usuario"
-                    class="form-input">
+                <input id="email" formControlName="email" type="text" placeholder="Dirección de correo o nombre de usuario"
+                    class="form-input" autocomplete="false">
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input formControlName="password" type="password" placeholder="Contraseña" class="form-input">
+                <input id="password" formControlName="password" type="password" placeholder="Contraseña" class="form-input">
             </div>
             <div class="form-steps">
                 <a class="link" href="">¿Se te ha olvidado la contraseña?</a>
             </div>
-            <div *ngIf="loginForm.invalid">
-                Ocurrio un error con tu email o password
+            <div class="error-session" *ngIf="errorSession">
+                <p class="error-txt">Credenciales invalidas</p>
             </div>
             <div class="form-action">
                 <button [disabled]="loginForm.invalid" class="login social-btn">Iniciar sesión</button>

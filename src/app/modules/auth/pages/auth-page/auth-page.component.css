@@ -107,3 +107,8 @@
 input.ng-invalid.ng-touched {
     border: solid 2px red !important
 }
+
+.error-session p{
+        color: red !important;
+        font-size: 14px;
+}
