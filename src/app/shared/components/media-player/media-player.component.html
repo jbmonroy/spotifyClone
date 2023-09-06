@@ -14,12 +14,11 @@
         </div>
     </div>
 </div>
-
 <!-- ZONE TEMPLATES -->
 
 <ng-template #artistZone>
-    <div class="artist-inside">
-        <img [src]="" alt="" class="cover">
+    <div class="artist-inside" *ngIf="_multimediaService.trackInfo$ | async as data">
+        <img [src]="data.cover" alt="" class="cover">
         <div class="track-info">
             <h3 class="track-title"></h3>
             <h5 class="track-title sub-title"></h5>

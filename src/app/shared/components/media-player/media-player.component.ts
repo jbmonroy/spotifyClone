@@ -13,17 +13,10 @@ import { TrackModel } from '@core/models/tracks.model';
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
   private subList$: Subscription[] = [];
-  
-  private _multimediaService = inject(MultimediaService); 
+  public _multimediaService = inject(MultimediaService);
 
   ngOnInit(): void {
-    this.subList$.push(
-      this._multimediaService.callback.subscribe(
-        (track:TrackModel)=>{
-          console.log('Recibiendo track',track);
-        }
-      )
-    );
+    
   }
   ngOnDestroy(): void {
     this.subList$.forEach(sub=>sub.unsubscribe());
