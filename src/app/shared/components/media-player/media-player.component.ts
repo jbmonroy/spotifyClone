@@ -1,8 +1,7 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MultimediaService } from '@shared/services/multimedia.service';
 import { Subscription } from 'rxjs';
-import { TrackModel } from '@core/models/tracks.model';
 
 @Component({
   selector: 'app-media-player',
@@ -13,20 +12,33 @@ import { TrackModel } from '@core/models/tracks.model';
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
   private subList$: Subscription[] = [];
-  
-  private _multimediaService = inject(MultimediaService); 
+  public status: string = 'pause';
+  public _multimediaService = inject(MultimediaService);
+  @ViewChild('progressBar')progressBar:ElementRef = new ElementRef('');
 
   ngOnInit(): void {
     this.subList$.push(
-      this._multimediaService.callback.subscribe(
-        (track:TrackModel)=>{
-          console.log('Recibiendo track',track);
+      this._multimediaService.playerStatus$.subscribe(
+        (status:string)=>{
+          this.status = status;
         }
       )
-    );
+    );  
   }
+
   ngOnDestroy(): void {
-    this.subList$.forEach(sub=>sub.unsubscribe());
+    this.subList$.forEach(item=>item.unsubscribe());
   }
+
+  handlePosition(evt:MouseEvent): void {
+    const { clientX } = evt;
+    const { nativeElement } = this.progressBar;
+    const { x, width } = nativeElement.getBoundingClientRect();
+    const clickX = clientX - x;
+    const percentage = (clickX * 100)/width;
+    this._multimediaService.playerPercentage$.next(percentage);
+    this._multimediaService.seekAudio(percentage);
+  }
+
 
 }
