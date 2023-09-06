@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrackModel } from '@core/models/tracks.model';
 import { OrderListPipe } from '@shared/pipes/order-list.pipe';
@@ -13,21 +13,10 @@ import { TracksService } from '@modules/tracks/services/tracks.service';
   styleUrls: ['./playlist-body.component.css']
 })
 export class PlaylistBodyComponent implements OnInit {
-  tracks: TrackModel[] = [];
   sort: { property: string | null, order: string } = { property: null, order: 'asc' };
-  private _tracksService = inject(TracksService);
+  @Input('dataTracks')tracks: TrackModel[] = []
 
   ngOnInit(): void {
-    this.getTracks();
-  }
-
-  getTracks(): void {
-    this._tracksService.dataTracksTrending$().subscribe({
-      next: (tracks:TrackModel[])=>{
-        this.tracks = tracks;
-      }
-    });
-
   }
 
   changeSort(property: string = 'name'): void {
@@ -36,7 +25,6 @@ export class PlaylistBodyComponent implements OnInit {
       property: property,
       order: order === 'asc'? 'desc':'asc'
     }
-
   }
 
 }
