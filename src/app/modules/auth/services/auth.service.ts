@@ -30,4 +30,8 @@ export class AuthService {
       })
     );
   }
+
+  set _httpClient(http:any){
+    this.httpClient = http;
+  }
 }
